@@ -14,7 +14,7 @@ export const CreateUserDTO = USerSchema.pick(
         confirmPassword: z.string().min(6)
     }
 ).refine( // extra vlaidation for confirmPassoword
-    (data) => data.password ===data.confirmPassword
+    (data) => data.password ===data.confirmPassword,
     {
         message: "Passowrds donot match",
         path:["confirmPassword"]

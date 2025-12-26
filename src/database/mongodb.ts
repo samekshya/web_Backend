@@ -3,6 +3,7 @@ import {MONGODB_URI} from "../config";
 
 export async function connectDatabase(){
     try {
+        console.log("MONGODB_URI:", MONGODB_URI);
         await mongoose.connect(MONGODB_URI);
         console.log("Connect to MongoDB");
     }catch (error) {
