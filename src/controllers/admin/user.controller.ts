@@ -4,7 +4,7 @@ import { z } from "zod";
 import { CreateUserDTO } from "../../dtos/user.dto";
 let adminUserService = new AdminUserService();
 
-export class AdminUSercontroller{
+export class AdminUsercontroller{
     async createUser(req: Request, res: Response){
         //can be same as AuthController.register
     }
@@ -15,7 +15,7 @@ export class AdminUSercontroller{
             return res.status(200).json({success: true, data: user});
         }catch(error: Error | any){
             return res.status(error.statusCode || 500).json(
-                {sucess: false, message: error.message || 'Internal Server Error'}
+                {success: false, message: error.message || 'Internal Server Error'}
             );
         }   
     }

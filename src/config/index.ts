@@ -8,3 +8,7 @@ export const MONGODB_URI: string =
 
 //Application level constants, with fallbacks
 // if .env variables are not set
+
+
+export const JWT_SECRET: string =
+    process.env.JWT_SECRET || 'default'

@@ -11,6 +11,7 @@ console.log(process.env.PORT);
 
 import authRoutes from './routes/auth.routes';
 import bookRoutes from './routes/books.routes';
+import authUserRoutes from './routes/admin/user.route';
 
 
 const app: Application = express();
@@ -19,6 +20,9 @@ const app: Application = express();
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
+
+app.use('/api/books', bookRoutes);
+app.use('/api/admin/users', authUserRoutes);
 
 app.get('/', (req: Request, res:Response) => {
     res.send('Hello, TypeScript with Express!');
