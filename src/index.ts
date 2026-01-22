@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import { date } from 'zod/v4/mini/coerce.cjs';
 import { connectDatabase }  from './database/mongodb';  
 import { PORT } from './config';
-import { cors } from 'cors';
+// import { cors } from 'cors';
 import path from 'path';
 
 import dotenv from "dotenv";
@@ -61,4 +61,8 @@ async function startServer(){
   );
 }
 startServer();
+
+function cors(corsOptions: { origin: string[]; }): any {
+    throw new Error('Function not implemented.');
+}
 
