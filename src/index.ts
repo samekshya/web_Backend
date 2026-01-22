@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import { date } from 'zod/v4/mini/coerce.cjs';
 import { connectDatabase }  from './database/mongodb';  
 import { PORT } from './config';
+import { cors } from 'cors';
+import path from 'path';
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -15,6 +17,17 @@ import authUserRoutes from './routes/admin/user.route';
 
 
 const app: Application = express();
+
+app.use('uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
+let corsOptions = {
+    origin: ['http://localhost:3000', "http://localhost:3005"], 
+    //which domain can access your backend server
+    //add frontend domain in origin 
+    // Allow requests from this origin
+}
+//prigin : "*", //allow all domain to access your backend server
+app.use(cors(corsOptions));
 // const PORT: number = 3000;
 
 app.use(bodyParser.json());

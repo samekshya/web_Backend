@@ -7,7 +7,12 @@ const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     firstName: { type: String },
     lastName: { type: String }, 
-    role: { type: String, enum: ["user", "admin"], default: "user" },
+    role: { 
+        type: String, 
+        enum: ["user", "admin"],
+        default: "user",
+     },
+    imageUrl: { type: String, required: false  
 }, {
     timestamps: true, //auto createdAt and updatedAt
 });

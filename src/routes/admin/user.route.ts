@@ -7,7 +7,7 @@ import router from "../books.routes";
 
 let adminUserController = new AdminUsercontroller();
 
-router.get("/:id",authorizedMiddleware, adminUserController.getOneUser);
+router.get("/:id",authorizedMiddleware, adminOnlyMiddleWare, adminUserController.getOneUser);
 //define admin suer routes
 
 export default router;

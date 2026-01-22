@@ -51,4 +51,34 @@ export class UserService {
         const token = jwt.sign(payload, JWT_SECRET, {expiresIn: '30d'});
         return {token, user}
     }
+
+    async getUserById(id: string){
+        const user = await userRepository.getUserById(id);
+    }
+
+    async updateUser(id: string, data: UpdateUserDTO){
+        const user = await userRepository.getUserById(id);
+        if(!user){
+            throw new HttpError(404, "User not found");
+        }
+        if(user.email !== data.email){
+            const emailCheck = await userRepository.getUserByEmail(data.email);
+            if(emailCheck){
+                throw new HttpError(403, "Email already exists");
+            }
+        }
+        if(user.username !== data.username){
+            const usernameCheck = await userRepository.getUserByUsername(data.username);
+            if(usernameCheck){
+                throw new HttpError(403, "Username already exists");
+            }
+        }
+        if(data.password){
+            //hash new password
+            const hashedPassword = await bcryptjs.hash(data.password, 10);
+            data.password = hashedPassword;
+        }
+        const updatedUser = await userRepository.updateUser(id, data);
+        return updatedUser;
+    }
 }

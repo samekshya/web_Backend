@@ -41,3 +41,18 @@ export const authorizedMiddleware =
     // }
     // return res.status(401).json({ success: false, message: "Unauthorized" });
 }
+
+export const adminMiddleware =
+    async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            if(!req.user) throw new HttpError(401, "Unauthorized User Not Found");
+            if (req.user.role !== 'admin'){
+                throw new HttpError(403, "Forbidden Admins Only");
+            }
+            return next();
+        }catch(error: Error | any){
+    return res.status(error.statusCode ?? 500).json(
+        { success: false, message: error.message || "Internal Server Error" }
+    );
+}
+}
